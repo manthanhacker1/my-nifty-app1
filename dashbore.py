@@ -122,7 +122,9 @@ def generate_signals(df):
     signals['EMA_20'] = np.where(df['close'] > df['EMA_20'], 1, -1)
 
     # 3. SMA 50 (Indicator 7)
-    signals['SMA_50'] = np.where(df['close'] > df['SMA_50_20'], 1, -1) # Note: pandas-ta uses SMA_length_lookback
+    # --- THIS IS THE FIX ---
+    # The column is 'SMA_50', not 'SMA_50_20'
+    signals['SMA_50'] = np.where(df['close'] > df['SMA_50'], 1, -1)
 
     # 4. MACD (Indicator 10)
     # Your condition: MACD > Signal. This is true when Histogram > 0
