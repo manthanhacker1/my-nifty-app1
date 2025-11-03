@@ -1,5 +1,5 @@
-streamlit
 pandas
-pandas-ta
-kiteconnect
 numpy
+streamlit
+TA-Lib==0.4.24
+kiteconnect
