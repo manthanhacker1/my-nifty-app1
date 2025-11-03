@@ -95,6 +95,7 @@ def calculate_indicators(df):
 
     # 5. Bollinger Bands (Close > Midband)
     # Adds: BBL_20_2.0, BBM_20_2.0 (Midband), BBU_20_2.0, BBB_20_2.0, BBP_20_2.0
+    # Note: Column names might be BBM_20, etc., depending on library version
     df.ta.bbands(length=20, append=True)
 
     # 6. SuperTrend (Green)
@@ -122,7 +123,6 @@ def generate_signals(df):
     signals['EMA_20'] = np.where(df['close'] > df['EMA_20'], 1, -1)
 
     # 3. SMA 50 (Indicator 7)
-    # --- THIS IS THE FIX ---
     # The column is 'SMA_50', not 'SMA_50_20'
     signals['SMA_50'] = np.where(df['close'] > df['SMA_50'], 1, -1)
 
@@ -136,7 +136,9 @@ def generate_signals(df):
 
     # 6. Bollinger Bands (Indicator 14)
     # Your condition: Close > Midband
-    signals['BBANDS'] = np.where(df['close'] > df['BBM_20_2.0'], 1, -1)
+    # --- THIS IS THE FIX ---
+    # Column name is likely 'BBM_20' (length only), not 'BBM_20_2.0'
+    signals['BBANDS'] = np.where(df['close'] > df['BBM_20'], 1, -1)
 
     # 7. SuperTrend (Indicator 16)
     # Your condition: Green (1) vs Red (-1)
